@@ -1,30 +1,22 @@
 import React from 'react';
-import {StyleSheet, SafeAreaView, Text} from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+
 import Home from './src/screens/containers/Home';
+import Header from './src/sections/components/Header';
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View>
       <Home>
-        <Text>Header</Text>
+        <Header />
         <Text>Buscador</Text>
         <Text>Categoria</Text>
         <Text>Sugerencias</Text>
       </Home>
-    </SafeAreaView>
+    </View>
   );
 };
 
 export default App;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logo: {
-    width: 300,
-    height: 90,
-  },
-});
+const styles = StyleSheet.create({});
