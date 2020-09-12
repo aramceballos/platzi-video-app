@@ -1,22 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-const Suggestion = ({ title, year, rating, genre }) => {
+const Suggestion = ({ title, year, rating, genres, medium_cover_image }) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image
-          style={styles.thumbnail}
-          source={require('../../assets/logo.png')}
-        />
+        <Image style={styles.thumbnail} source={{ uri: medium_cover_image }} />
         <View style={styles.genreContainer}>
-          <Text style={styles.genre}>{genre}</Text>
+          <Text style={styles.genre}>{genres[0]}</Text>
         </View>
       </View>
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.year}>{year}</Text>
-        <Text style={styles.rating}>{rating}</Text>
+        <Text style={styles.rating}>{rating} Stars</Text>
       </View>
     </View>
   );
