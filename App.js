@@ -1,22 +1,22 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 
-import Home from './src/screens/containers/Home';
-import Header from './src/sections/components/Header';
+import Home from './src/screens/Home';
+import Header from './src/components/Header';
+import SuggestionsList from './src/components/SuggestionsList';
 
 const App = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Home>
         <Header />
-        <Text>Buscador</Text>
-        <Text>Categoria</Text>
-        <Text>Sugerencias</Text>
+        <Text>Search</Text>
+        <Text>Categories</Text>
+        <Text>Suggestions</Text>
+        <SuggestionsList />
       </Home>
-    </View>
+    </SafeAreaView>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({});
