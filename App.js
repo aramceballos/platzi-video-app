@@ -4,16 +4,20 @@ import { SafeAreaView, Text } from 'react-native';
 import Home from './src/screens/Home';
 import Header from './src/components/Header';
 import SuggestionsList from './src/components/SuggestionsList';
-import { getSuggestions } from './src/utils/api';
+import CategoriesList from './src/components/CategoriesList';
+import { getSuggestions, getMovies } from './src/utils/api';
 
 const App = () => {
   const [suggestedMovies, setSuggestedMovies] = useState([]);
+  const [categoriesMovies, setCategories] = useState([]);
 
   useEffect(() => {
     (async () => {
       const movies = await getSuggestions(1);
+      const categories = await getMovies();
 
       setSuggestedMovies(movies);
+      setCategories(categories);
     })();
   }, []);
 
@@ -22,8 +26,7 @@ const App = () => {
       <Home>
         <Header />
         <Text>Search</Text>
-        <Text>Categories</Text>
-        <Text>Suggestions</Text>
+        <CategoriesList categories={categoriesMovies} />
         <SuggestionsList movies={suggestedMovies} />
       </Home>
     </SafeAreaView>

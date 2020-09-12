@@ -1,29 +1,31 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 
-import Layout from './SuggestionsListLayout';
+import Layout from './CategoriesListLayout';
 import Empty from './Empty';
 import Separator from './Separator';
-import Suggestion from './Suggestion';
+import Category from './Category';
 
-const SuggestionsList = ({ movies }) => {
+const CategoryList = ({ categories }) => {
   const keyExtractor = (item) => item.id.toString();
 
   const renderEmpty = () => <Empty text="There are not suggestions" />;
 
-  const separator = () => <Separator />;
+  const separator = () => <Separator horizontal={true} />;
 
   return (
     <Layout>
       <FlatList
-        data={movies}
+        data={categories}
+        horizontal={true}
         ItemSeparatorComponent={separator}
         keyExtractor={keyExtractor}
         ListEmptyComponent={renderEmpty}
-        renderItem={({ item }) => <Suggestion {...item} />}
+        renderItem={({ item }) => <Category {...item} />}
+        showsHorizontalScrollIndicator={false}
       />
     </Layout>
   );
 };
 
-export default SuggestionsList;
+export default CategoryList;
