@@ -1,7 +1,6 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { StyleSheet, ImageBackground, FlatList, Text } from 'react-native';
 
-import Layout from './CategoriesListLayout';
 import Empty from './Empty';
 import Separator from './Separator';
 import Category from './Category';
@@ -14,7 +13,10 @@ const CategoryList = ({ categories }) => {
   const separator = () => <Separator horizontal={true} />;
 
   return (
-    <Layout>
+    <ImageBackground
+      style={styles.container}
+      source={require('../../assets/background.png')}>
+      <Text style={styles.title}>Categories</Text>
       <FlatList
         data={categories}
         horizontal={true}
@@ -24,8 +26,21 @@ const CategoryList = ({ categories }) => {
         renderItem={({ item }) => <Category {...item} />}
         showsHorizontalScrollIndicator={false}
       />
-    </Layout>
+    </ImageBackground>
   );
 };
 
 export default CategoryList;
+
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 30,
+    paddingHorizontal: 10,
+  },
+  title: {
+    color: '#4c4c4c',
+    fontSize: 20,
+    marginBottom: 10,
+    fontWeight: 'bold',
+  },
+});

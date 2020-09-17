@@ -1,7 +1,6 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { StyleSheet, FlatList, Text, View } from 'react-native';
 
-import Layout from './SuggestionsListLayout';
 import Empty from './Empty';
 import Separator from './Separator';
 import Suggestion from './Suggestion';
@@ -14,7 +13,8 @@ const SuggestionsList = ({ movies }) => {
   const separator = () => <Separator />;
 
   return (
-    <Layout>
+    <View style={styles.container}>
+      <Text style={styles.title}>Recommendations for you</Text>
       <FlatList
         data={movies}
         ItemSeparatorComponent={separator}
@@ -22,8 +22,21 @@ const SuggestionsList = ({ movies }) => {
         ListEmptyComponent={renderEmpty}
         renderItem={({ item }) => <Suggestion {...item} />}
       />
-    </Layout>
+    </View>
   );
 };
 
 export default SuggestionsList;
+
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 10,
+    marginLeft: 8,
+  },
+  title: {
+    color: '#4c4c4c',
+    fontSize: 20,
+    marginBottom: 10,
+    fontWeight: 'bold',
+  },
+});

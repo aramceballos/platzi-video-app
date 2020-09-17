@@ -2,7 +2,7 @@ import React from 'react';
 import {
   StyleSheet,
   Text,
-  TouchableOpacity,
+  View,
   ImageBackground,
   Platform,
 } from 'react-native';
@@ -11,13 +11,13 @@ const Category = ({ genres, medium_cover_image }) => {
   const onPress = () => {};
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <View onPress={onPress} style={styles.container}>
       <ImageBackground
         style={styles.wrapper}
         source={{ uri: medium_cover_image }}>
         <Text style={styles.text}>{genres[0]}</Text>
       </ImageBackground>
-    </TouchableOpacity>
+    </View>
   );
 };
 

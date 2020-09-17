@@ -4,7 +4,7 @@ import { View } from 'react-native';
 const Separator = ({ horizontal }) => {
   return (
     <View
-      style={{ height: !horizontal && 15, marginHorizontal: horizontal && 5 }}
+      style={{ height: horizontal ? 0 : 15, marginHorizontal: horizontal ? 5 : 0 }}
     />
   );
 };
