@@ -1,39 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, Text, ScrollView } from 'react-native';
+import React from 'react';
+import { SafeAreaView } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
 import Home from './src/screens/Home';
 import Header from './src/components/Header';
-import SuggestionsList from './src/components/SuggestionsList';
-import CategoriesList from './src/components/CategoriesList';
-import { getSuggestions, getMovies } from './src/utils/api';
-import Player from './src/components/Player';
+import ListOfSuggestions from './src/containers/ListOfSuggestions';
+import Categories from './src/components/Categories';
+// import Player from './src/components/Player';
+import reducer from './src/reducers';
+
+const store = createStore(reducer, {
+  categories: [
+    'Action',
+    'Adventure',
+    'Comedy',
+    'Crime',
+    'Documentary',
+    'Drama',
+    'Horror',
+    'Musical',
+  ],
+});
 
 const App = () => {
-  const [suggestedMovies, setSuggestedMovies] = useState([]);
-  const [categoriesMovies, setCategories] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const movies = await getSuggestions(1);
-      const categories = await getMovies();
-
-      setSuggestedMovies(movies);
-      setCategories(categories);
-    })();
-  }, []);
-
   return (
-    <SafeAreaView>
-      <Header />
-      <ScrollView>
+    <Provider store={store}>
+      <SafeAreaView>
+        <Header />
         <Home>
-          <Player />
-          <Text>Search</Text>
-          <CategoriesList categories={categoriesMovies} />
-          <SuggestionsList movies={suggestedMovies} />
+          {/* <Player /> */}
+          <Categories />
+          <ListOfSuggestions />
         </Home>
-      </ScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </Provider>
   );
 };
 
