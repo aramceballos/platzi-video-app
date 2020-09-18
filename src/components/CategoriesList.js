@@ -25,6 +25,7 @@ const CategoryList = ({ categories }) => {
         ListEmptyComponent={renderEmpty}
         renderItem={({ item }) => <Category {...item} />}
         showsHorizontalScrollIndicator={false}
+        style={styles.list}
       />
     </ImageBackground>
   );
@@ -35,6 +36,8 @@ export default CategoryList;
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 30,
+  },
+  list: {
     paddingHorizontal: 10,
   },
   title: {
@@ -42,5 +45,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 10,
     fontWeight: 'bold',
+    paddingHorizontal: 10,
   },
 });

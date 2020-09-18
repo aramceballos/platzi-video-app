@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, SafeAreaView, Text } from 'react-native';
+import { SafeAreaView, Text, ScrollView } from 'react-native';
 
 import Home from './src/screens/Home';
 import Header from './src/components/Header';
@@ -24,17 +24,17 @@ const App = () => {
 
   return (
     <SafeAreaView>
-      <Home>
-        <Header />
-        <Player />
-        <Text>Search</Text>
-        <CategoriesList categories={categoriesMovies} />
-        <SuggestionsList movies={suggestedMovies} />
-      </Home>
+      <Header />
+      <ScrollView>
+        <Home>
+          <Player />
+          <Text>Search</Text>
+          <CategoriesList categories={categoriesMovies} />
+          <SuggestionsList movies={suggestedMovies} />
+        </Home>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({});
