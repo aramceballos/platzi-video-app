@@ -15,6 +15,7 @@
     "react": "16.13.1",
     "react-native": "0.63.2",
     "react-native-video": "5.1.0-alpha8",
+    "react-native-webview": "10.9.0",
     "react-redux": "7.2.1",
     "redux": "4.0.5",
     "redux-persist": "6.0.0"

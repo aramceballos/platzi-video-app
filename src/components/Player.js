@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import Video from 'react-native-video';
 
-const Player = ({ closeMovie }) => {
+const Player = () => {
   const [player, setPlayer] = useState({});
   const [loading, setLoading] = useState(true);
   const [showOverlay, setShowOverlay] = useState(false);
@@ -103,26 +103,6 @@ const Player = ({ closeMovie }) => {
         />
       </View>
       <View style={[styles.overlay, showOverlay && styles.overlayDark]}>
-        {showOverlay && (
-          <Pressable
-            hitSlop={{
-              top: 10,
-              bottom: 10,
-              left: 10,
-              right: 10,
-            }}
-            onPress={closeMovie}
-            style={{ position: 'absolute', top: 15, right: 15 }}>
-            <Image
-              style={{
-                height: 15,
-                width: 15,
-                tintColor: '#fff',
-              }}
-              source={require('../assets/cancel.png')}
-            />
-          </Pressable>
-        )}
         {loading && <ActivityIndicator color="red" size="large" />}
 
         {!loading && showOverlay && (

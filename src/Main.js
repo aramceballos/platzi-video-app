@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import Home from './screens/Home';
 import Movie from './screens/Movie';
-import Header from './components/Header';
 
 const Main = ({ selectedMovie }) => {
   return (
@@ -15,7 +14,6 @@ const Main = ({ selectedMovie }) => {
         networkActivityIndicatorVisible={true}
         showHideTransition="fade"
       />
-      <Header />
       {selectedMovie ? <Movie /> : <Home />}
     </SafeAreaView>
   );
