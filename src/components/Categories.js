@@ -16,7 +16,7 @@ const ListOfCategories = ({ categories }) => {
   return (
     <ImageBackground
       style={styles.container}
-      source={require('../../assets/background.png')}>
+      source={require('../assets/background.png')}>
       <Text style={styles.title}>Categories</Text>
       <FlatList
         contentContainerStyle={styles.list}

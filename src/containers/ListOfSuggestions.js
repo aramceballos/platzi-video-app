@@ -58,7 +58,7 @@ const ListOfSuggestions = (props) => {
         ItemSeparatorComponent={separator}
         keyExtractor={keyExtractor}
         ListEmptyComponent={renderEmpty}
-        renderItem={({ item }) => <Suggestion {...item} />}
+        renderItem={({ item }) => <Suggestion item={item} />}
       />
     </View>
   );

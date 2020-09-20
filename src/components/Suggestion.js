@@ -1,11 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { connect } from 'react-redux';
 
-const Suggestion = ({ title, year, rating, genres, medium_cover_image }) => {
-  const onPress = () => {};
+import { setSelectedMovie } from '../actions';
+
+const Suggestion = (props) => {
+  const { title, year, rating, genres, medium_cover_image } = props.item;
+
+  const onPress = () => {
+    props.setSelectedMovie(props.item);
+  };
 
   return (
-    <View onPress={onPress} style={styles.container}>
+    <Pressable onPress={onPress} style={styles.container}>
       <View style={styles.imageContainer}>
         <Image style={styles.thumbnail} source={{ uri: medium_cover_image }} />
         <View style={styles.genreContainer}>
@@ -17,11 +24,15 @@ const Suggestion = ({ title, year, rating, genres, medium_cover_image }) => {
         <Text style={styles.year}>{year}</Text>
         <Text style={styles.rating}>{rating} Stars</Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
-export default Suggestion;
+const mapDispatchToProps = {
+  setSelectedMovie,
+};
+
+export default connect(null, mapDispatchToProps)(Suggestion);
 
 const styles = StyleSheet.create({
   container: {

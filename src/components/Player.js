@@ -1,6 +1,6 @@
-import Slider from '@react-native-community/slider';
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-bitwise */
+import Slider from '@react-native-community/slider';
 import React, { useState } from 'react';
 import {
   StyleSheet,
@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import Video from 'react-native-video';
 
-const Player = () => {
+const Player = ({ closeMovie }) => {
   const [player, setPlayer] = useState({});
   const [loading, setLoading] = useState(true);
   const [showOverlay, setShowOverlay] = useState(false);
@@ -28,7 +28,6 @@ const Player = () => {
     var mins = ~~((seconds % 3600) / 60);
     var secs = ~~seconds % 60;
 
-    // Output like "1:01" or "4:03:59" or "123:03:59"
     var ret = '';
 
     if (hrs > 0) {
@@ -104,6 +103,26 @@ const Player = () => {
         />
       </View>
       <View style={[styles.overlay, showOverlay && styles.overlayDark]}>
+        {showOverlay && (
+          <Pressable
+            hitSlop={{
+              top: 10,
+              bottom: 10,
+              left: 10,
+              right: 10,
+            }}
+            onPress={closeMovie}
+            style={{ position: 'absolute', top: 15, right: 15 }}>
+            <Image
+              style={{
+                height: 15,
+                width: 15,
+                tintColor: '#fff',
+              }}
+              source={require('../assets/cancel.png')}
+            />
+          </Pressable>
+        )}
         {loading && <ActivityIndicator color="red" size="large" />}
 
         {!loading && showOverlay && (
@@ -112,12 +131,12 @@ const Player = () => {
               {paused ? (
                 <Image
                   style={{ height: 65, width: 65, tintColor: '#fff' }}
-                  source={require('../../assets/play.png')}
+                  source={require('../assets/play.png')}
                 />
               ) : (
                 <Image
                   style={{ height: 65, width: 65, tintColor: '#fff' }}
-                  source={require('../../assets/pause.png')}
+                  source={require('../assets/pause.png')}
                 />
               )}
             </Text>
@@ -125,7 +144,7 @@ const Player = () => {
         )}
 
         <View style={styles.controlsContainer}>
-          {showOverlay ? (
+          {showOverlay && (
             <>
               <View style={styles.firstRow}>
                 <Text style={styles.time}>
@@ -142,12 +161,12 @@ const Player = () => {
                   style={styles.time}>
                   <Image
                     style={{ height: 20, width: 20, tintColor: '#fff' }}
-                    source={require('../../assets/fullscreen.png')}
+                    source={require('../assets/fullscreen.png')}
                   />
                 </Pressable>
               </View>
             </>
-          ) : null}
+          )}
 
           <Slider
             style={{ height: 3, marginTop: 20 }}

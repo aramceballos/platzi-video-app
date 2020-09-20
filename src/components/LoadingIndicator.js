@@ -4,7 +4,7 @@ import { StyleSheet, ActivityIndicator, View, Image } from 'react-native';
 const LoadingIndicator = () => {
   return (
     <View style={styles.container}>
-      <Image style={styles.logo} source={require('../../assets/logo.png')} />
+      <Image style={styles.logo} source={require('../assets/logo.png')} />
       <ActivityIndicator size="large" color="red" />
     </View>
   );
