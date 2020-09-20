@@ -2,15 +2,25 @@ import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import Home from './src/screens/Home';
 import Header from './src/components/Header';
 import ListOfSuggestions from './src/containers/ListOfSuggestions';
 import Categories from './src/components/Categories';
-// import Player from './src/components/Player';
-import reducer from './src/reducers';
+import rootReducer from './src/reducers';
+import LoadingIndicator from './src/components/LoadingIndicator';
 
-const store = createStore(reducer, {
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = createStore(persistedReducer, {
   categories: [
     'Action',
     'Adventure',
@@ -21,19 +31,22 @@ const store = createStore(reducer, {
     'Horror',
     'Musical',
   ],
+  suggestions: [],
 });
+const persistor = persistStore(store);
 
 const App = () => {
   return (
     <Provider store={store}>
-      <SafeAreaView>
-        <Header />
-        <Home>
-          {/* <Player /> */}
-          <Categories />
-          <ListOfSuggestions />
-        </Home>
-      </SafeAreaView>
+      <PersistGate loading={<LoadingIndicator />} persistor={persistor}>
+        <SafeAreaView>
+          <Header />
+          <Home>
+            <Categories />
+            <ListOfSuggestions />
+          </Home>
+        </SafeAreaView>
+      </PersistGate>
     </Provider>
   );
 };

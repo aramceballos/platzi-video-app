@@ -6,14 +6,16 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import Empty from '../components/Empty';
-import Separator from '../components/Separator';
 import Suggestion from '../components/Suggestion';
+import { setSuggestions } from '../actions';
 
-const ListOfSuggestions = () => {
-  const [suggestions, setSuggestions] = useState([]);
+const ListOfSuggestions = (props) => {
   const [loading, setLoading] = useState(true);
+
+  const { suggestions } = props;
 
   useEffect(() => {
     getSuggestions();
@@ -23,14 +25,14 @@ const ListOfSuggestions = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        'https://yts.mx/api/v2//movie_suggestions.json?movie_id=1',
+        'https://yts.mx/api/v2/movie_suggestions.json?movie_id=1',
       );
 
       const {
         data: { movies },
       } = await response.json();
 
-      setSuggestions(movies);
+      props.setSuggestions(movies);
       setLoading(false);
     } catch (error) {
       console.log('error getting suggestions', error);
@@ -41,7 +43,7 @@ const ListOfSuggestions = () => {
   const keyExtractor = (item) => item.id.toString();
 
   const renderEmpty = () =>
-    !loading && suggestions.length < 1 ? (
+    !loading && (suggestions === undefined || suggestions.length < 1) ? (
       <Empty text="There are not suggestions" />
     ) : null;
 
@@ -62,7 +64,15 @@ const ListOfSuggestions = () => {
   );
 };
 
-export default ListOfSuggestions;
+const mapStateToProps = (state) => ({
+  suggestions: state.suggestions,
+});
+
+const mapDispatchToProps = {
+  setSuggestions,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListOfSuggestions);
 
 const styles = StyleSheet.create({
   container: {
