@@ -1,26 +1,57 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { StatusBar, Platform, SafeAreaView } from 'react-native';
-import { connect } from 'react-redux';
+import { StatusBar, Platform, Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Home from './screens/Home';
-import Movie from './screens/Movie';
+import HomeStack from './stacks/Home';
+import UserStack from './stacks/User';
 
-const Main = ({ selectedMovie }) => {
+const Tabs = createBottomTabNavigator();
+
+const Main = () => {
   return (
-    <SafeAreaView>
+    <>
       <StatusBar
         animated={true}
         barStyle={Platform.OS === 'ios' ? 'dark-content' : 'default'}
         networkActivityIndicatorVisible={true}
         showHideTransition="fade"
       />
-      {selectedMovie ? <Movie /> : <Home />}
-    </SafeAreaView>
+      <NavigationContainer>
+        <Tabs.Navigator
+          tabBarOptions={{
+            activeTintColor: '#00cc00',
+            showLabel: false,
+          }}>
+          <Tabs.Screen
+            name="Home"
+            component={HomeStack}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Image
+                  source={require('./assets/home.png')}
+                  style={{ width: 30, height: 30, tintColor: color }}
+                />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="User"
+            component={UserStack}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Image
+                  source={require('./assets/user.png')}
+                  style={{ width: 30, height: 30, tintColor: color }}
+                />
+              ),
+            }}
+          />
+        </Tabs.Navigator>
+      </NavigationContainer>
+    </>
   );
 };
 
-const mapStateToProps = (state) => ({
-  selectedMovie: state.selectedMovie,
-});
-
-export default connect(mapStateToProps)(Main);
+export default Main;

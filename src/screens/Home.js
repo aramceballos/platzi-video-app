@@ -1,17 +1,23 @@
 import React from 'react';
 
-import Header from '../components/Header';
 import Categories from '../components/Categories';
 import ListOfSuggestions from '../containers/ListOfSuggestions';
 import Search from '../components/Search';
 
-const Home = () => {
+const Home = ({ navigation }) => {
+  const onPress = (movie) => {
+    navigation.navigate('Movie', { movie });
+  };
+
+  const onSubmit = (movie) => {
+    navigation.navigate('Movie', { movie });
+  };
+
   return (
     <>
-      <Header />
-      <Search />
+      <Search onSubmit={onSubmit} />
       <Categories />
-      <ListOfSuggestions />
+      <ListOfSuggestions onPress={onPress} />
     </>
   );
 };

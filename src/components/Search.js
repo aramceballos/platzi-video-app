@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
-import { connect } from 'react-redux';
 
-import { setSelectedMovie } from '../actions';
-
-const Search = (props) => {
+const Search = ({ onSubmit }) => {
   const [text, setText] = useState('');
 
   const searchMovie = async (query) => {
@@ -17,7 +14,7 @@ const Search = (props) => {
         data: { movies },
       } = await response.json();
 
-      props.setSelectedMovie(movies[0]);
+      onSubmit(movies[0]);
     } catch (error) {
       console.log('err getting movies', error);
     }
@@ -46,11 +43,7 @@ const Search = (props) => {
   );
 };
 
-const mapDispatchToProps = {
-  setSelectedMovie,
-};
-
-export default connect(null, mapDispatchToProps)(Search);
+export default Search;
 
 const styles = StyleSheet.create({
   searchInput: {

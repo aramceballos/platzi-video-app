@@ -1,70 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet,
-  Pressable,
-  Image,
-  ScrollView,
-  Animated,
-} from 'react-native';
-import { connect } from 'react-redux';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 
-import Header from '../components/Header';
 import Player from '../components/Player';
 import Detail from '../components/Detail';
-import { deleteSelectedMovie } from '../actions';
 
-const Movie = (props) => {
-  const [opacity] = useState(new Animated.Value(0));
+const Movie = ({ navigation, route }) => {
+  const { movie } = route.params;
 
   useEffect(() => {
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration: 400,
-    }).start();
+    navigation.setOptions({ title: movie.title });
   }, []);
 
-  const closeMovie = () => {
-    props.deleteSelectedMovie();
-  };
-
   return (
-    <Animated.View
-      style={{
-        opacity: opacity,
-      }}>
-      <Header>
-        <Pressable
-          hitSlop={{
-            top: 10,
-            bottom: 10,
-            left: 10,
-            right: 10,
-          }}
-          onPress={closeMovie}>
-          <Image
-            style={styles.close}
-            source={require('../assets/cancel.png')}
-          />
-        </Pressable>
-      </Header>
-      <ScrollView>
-        <Player />
-        <Detail />
-      </ScrollView>
-    </Animated.View>
+    <>
+      <Player />
+      <Detail movie={movie} />
+    </>
   );
 };
 
-const mapDispatchToProps = {
-  deleteSelectedMovie,
-};
-
-export default connect(null, mapDispatchToProps)(Movie);
-
-const styles = StyleSheet.create({
-  close: {
-    height: 15,
-    width: 15,
-    tintColor: '#000',
-  },
-});
+export default Movie;

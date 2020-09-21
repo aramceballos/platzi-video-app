@@ -15,7 +15,7 @@ import { setSuggestions } from '../actions';
 const ListOfSuggestions = (props) => {
   const [loading, setLoading] = useState(true);
 
-  const { suggestions } = props;
+  const { suggestions, onPress } = props;
 
   useEffect(() => {
     getSuggestions();
@@ -58,7 +58,7 @@ const ListOfSuggestions = (props) => {
         ItemSeparatorComponent={separator}
         keyExtractor={keyExtractor}
         ListEmptyComponent={renderEmpty}
-        renderItem={({ item }) => <Suggestion item={item} />}
+        renderItem={({ item }) => <Suggestion item={item} onPress={onPress} />}
       />
     </View>
   );
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 10,
     marginLeft: 8,
+    flex: 1,
   },
   title: {
     color: '#4c4c4c',

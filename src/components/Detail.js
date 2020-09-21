@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import { WebView } from 'react-native-webview';
-import { connect } from 'react-redux';
 
 const makeHTML = (id) => {
   return `
@@ -26,35 +25,32 @@ const makeHTML = (id) => {
   `;
 };
 
-const Details = ({ selectedMovie }) => {
+const Details = ({ movie }) => {
   return (
-    <>
+    <ScrollView>
       <View style={styles.top}>
-        <Text style={styles.title}>{selectedMovie.title}</Text>
+        <Text style={styles.title}>{movie.title}</Text>
       </View>
       <View style={styles.bottom}>
         <View style={styles.details}>
           <Image
             style={styles.cover}
-            source={{ uri: selectedMovie.medium_cover_image }}
+            source={{ uri: movie.medium_cover_image }}
           />
-          <Text style={styles.description}>
-            {selectedMovie.description_full}
-          </Text>
+          <Text style={styles.description}>{movie.description_full}</Text>
         </View>
       </View>
       <View style={styles.trailer}>
-        <WebView source={{ html: makeHTML(selectedMovie.yt_trailer_code) }} />
+        <WebView
+          scrollEnabled={false}
+          source={{ html: makeHTML(movie.yt_trailer_code) }}
+        />
       </View>
-    </>
+    </ScrollView>
   );
 };
 
-const mapStateToProps = (state) => ({
-  selectedMovie: state.selectedMovie,
-});
-
-export default connect(mapStateToProps)(Details);
+export default Details;
 
 const styles = StyleSheet.create({
   container: {},
