@@ -1,5 +1,11 @@
-import React from 'react';
-import { StyleSheet, Pressable, Image, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  StyleSheet,
+  Pressable,
+  Image,
+  ScrollView,
+  Animated,
+} from 'react-native';
 import { connect } from 'react-redux';
 
 import Header from '../components/Header';
@@ -8,11 +14,24 @@ import Detail from '../components/Detail';
 import { deleteSelectedMovie } from '../actions';
 
 const Movie = (props) => {
+  const [opacity] = useState(new Animated.Value(0));
+
+  useEffect(() => {
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 400,
+    }).start();
+  }, []);
+
   const closeMovie = () => {
     props.deleteSelectedMovie();
   };
+
   return (
-    <>
+    <Animated.View
+      style={{
+        opacity: opacity,
+      }}>
       <Header>
         <Pressable
           hitSlop={{
@@ -32,7 +51,7 @@ const Movie = (props) => {
         <Player />
         <Detail />
       </ScrollView>
-    </>
+    </Animated.View>
   );
 };
 
