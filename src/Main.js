@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeStack from './stacks/Home';
 import UserStack from './stacks/User';
+import SearchStack from './stacks/Search';
 
 const Tabs = createBottomTabNavigator();
 
@@ -21,8 +22,11 @@ const Main = () => {
       <NavigationContainer>
         <Tabs.Navigator
           tabBarOptions={{
-            activeTintColor: '#00cc00',
+            activeTintColor: '#0c0',
             showLabel: false,
+            style: {
+              backgroundColor: '#fafafa',
+            },
           }}>
           <Tabs.Screen
             name="Home"
@@ -31,6 +35,18 @@ const Main = () => {
               tabBarIcon: ({ color }) => (
                 <Image
                   source={require('./assets/home.png')}
+                  style={{ width: 30, height: 30, tintColor: color }}
+                />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="Search"
+            component={SearchStack}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Image
+                  source={require('./assets/search.png')}
                   style={{ width: 30, height: 30, tintColor: color }}
                 />
               ),

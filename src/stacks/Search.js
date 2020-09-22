@@ -1,11 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import User from '../screens/User';
+import Search from '../screens/Search';
 
 const Stack = createStackNavigator();
 
-const UserStack = () => {
+function SearchStack() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -13,9 +13,9 @@ const UserStack = () => {
           backgroundColor: '#fafafa',
         },
       }}>
-      <Stack.Screen name="User" component={User} />
+      <Stack.Screen name="Search" component={Search} />
     </Stack.Navigator>
   );
-};
+}
 
-export default UserStack;
+export default SearchStack;

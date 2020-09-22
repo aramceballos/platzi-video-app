@@ -1,19 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const User = () => {
+const Search = () => {
   return (
     <View style={styles.container}>
-      <Text>User</Text>
+      <Text>Search</Text>
     </View>
   );
 };
 
-export default User;
+export default Search;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
     flex: 1,
+    backgroundColor: '#fff',
   },
 });

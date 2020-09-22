@@ -9,7 +9,14 @@ const Stack = createStackNavigator();
 
 const HomeStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        gestureEnabled: true,
+        headerBackTitleVisible: false,
+        headerStyle: {
+          backgroundColor: '#fafafa',
+        },
+      }}>
       <Stack.Screen
         name="Home"
         component={Home}

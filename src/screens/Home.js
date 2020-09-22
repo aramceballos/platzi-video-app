@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet, View } from 'react-native';
 
 import Categories from '../components/Categories';
 import ListOfSuggestions from '../containers/ListOfSuggestions';
@@ -14,12 +15,19 @@ const Home = ({ navigation }) => {
   };
 
   return (
-    <>
+    <View style={styles.container}>
       <Search onSubmit={onSubmit} />
       <Categories />
       <ListOfSuggestions onPress={onPress} />
-    </>
+    </View>
   );
 };
 
 export default Home;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+    flex: 1,
+  },
+});

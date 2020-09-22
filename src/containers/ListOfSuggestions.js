@@ -76,8 +76,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(ListOfSuggestions);
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 10,
-    marginLeft: 8,
+    paddingTop: 10,
+    marginTop: 8,
     flex: 1,
   },
   title: {

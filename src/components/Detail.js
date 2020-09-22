@@ -27,7 +27,7 @@ const makeHTML = (id) => {
 
 const Details = ({ movie }) => {
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <View style={styles.top}>
         <Text style={styles.title}>{movie.title}</Text>
       </View>
@@ -53,7 +53,11 @@ const Details = ({ movie }) => {
 export default Details;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    zIndex: -1,
+  },
   trailer: {
     height: 200,
     marginBottom: 20,
