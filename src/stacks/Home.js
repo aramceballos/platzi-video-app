@@ -1,5 +1,8 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  HeaderStyleInterpolators,
+} from '@react-navigation/stack';
 
 import Home from '../screens/Home';
 import Movie from '../screens/Movie';
@@ -16,6 +19,7 @@ const HomeStack = () => {
         headerStyle: {
           backgroundColor: '#fafafa',
         },
+        headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
       }}>
       <Stack.Screen
         name="Home"

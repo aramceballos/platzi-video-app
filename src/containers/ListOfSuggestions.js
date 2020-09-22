@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     marginTop: 8,
     flex: 1,
+    marginHorizontal: 10,
   },
   title: {
     color: '#4c4c4c',
