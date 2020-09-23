@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, Platform } from 'react-native';
+import {
+  StyleSheet,
+  TextInput,
+  Platform,
+  Dimensions,
+  View,
+  Image,
+} from 'react-native';
 import { connect } from 'react-redux';
 
 import { setMoviesResult } from '../actions';
+
+const screen = Dimensions.get('window');
 
 const Search = (props) => {
   const [text, setText] = useState('');
@@ -32,21 +41,27 @@ const Search = (props) => {
   };
 
   return (
-    <TextInput
-      autoCapitalize="none"
-      autoCorrect={false}
-      keyboardAppearance="light"
-      onChangeText={handleChange}
-      onSubmitEditing={handleSubmit}
-      placeholder="Search"
-      placeholderTextColor="#555"
+    <View
       style={[
-        styles.searchInput,
-        Platform.OS === 'ios' && styles.searchInputIOS,
-      ]}
-      underlineColorAndroid="transparent"
-      value={text}
-    />
+        styles.searchSection,
+        Platform.OS === 'ios' && styles.searchSectionIOS,
+      ]}>
+      <Image
+        source={require('../assets/search.png')}
+        style={styles.searchIcon}
+      />
+      <TextInput
+        autoCorrect={false}
+        keyboardAppearance="light"
+        onChangeText={handleChange}
+        onSubmitEditing={handleSubmit}
+        placeholder="Search"
+        placeholderTextColor="#999"
+        style={styles.searchInput}
+        underlineColorAndroid="transparent"
+        value={text}
+      />
+    </View>
   );
 };
 
@@ -58,16 +73,24 @@ export default connect(null, mapDispatchToProps)(Search);
 
 const styles = StyleSheet.create({
   searchInput: {
-    padding: 15,
-    fontSize: 15,
-    borderWidth: 1,
-    borderColor: '#eaeaea',
+    fontSize: 17,
+    width: screen.width - 50,
   },
-  searchInputIOS: {
-    backgroundColor: '#ddd',
-    width: 300,
+  searchSectionIOS: {
+    backgroundColor: '#eee',
     borderRadius: 10,
     padding: 8,
-    borderColor: '#0000',
+    height: 37,
+  },
+  searchSection: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  searchIcon: {
+    height: 20,
+    width: 20,
+    tintColor: '#999',
+    margin: 5,
   },
 });
