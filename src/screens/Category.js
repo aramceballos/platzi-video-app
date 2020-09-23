@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 
 import Empty from '../components/Empty';
-import Suggestion from '../components/Suggestion';
+import MovieItem from '../components/MovieItem';
 import { setSuggestions } from '../actions';
 
 const Category = ({ navigation, route }) => {
@@ -46,13 +46,11 @@ const Category = ({ navigation, route }) => {
   };
 
   const keyExtractor = (item) => item.id.toString();
-
+  const separator = () => <View style={styles.separator} />;
   const renderEmpty = () =>
     !loading && (categoryMovies === undefined || categoryMovies.length < 1) ? (
       <Empty text="There are not movies of this category" />
     ) : null;
-
-  const separator = () => <View style={styles.separator} />;
 
   return (
     <View style={styles.container}>
@@ -64,7 +62,7 @@ const Category = ({ navigation, route }) => {
         keyExtractor={keyExtractor}
         ListEmptyComponent={renderEmpty}
         renderItem={({ item }) => (
-          <Suggestion item={item} onPress={() => onPress(item)} />
+          <MovieItem item={item} onPress={() => onPress(item)} />
         )}
       />
     </View>

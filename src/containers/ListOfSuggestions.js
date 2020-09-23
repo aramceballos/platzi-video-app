@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 
 import Empty from '../components/Empty';
-import Suggestion from '../components/Suggestion';
+import MovieItem from '../components/MovieItem';
 import { setSuggestions } from '../actions';
 
 const ListOfSuggestions = (props) => {
@@ -41,13 +41,11 @@ const ListOfSuggestions = (props) => {
   };
 
   const keyExtractor = (item) => item.id.toString();
-
+  const separator = () => <View style={styles.separator} />;
   const renderEmpty = () =>
     !loading && (suggestions === undefined || suggestions.length < 1) ? (
       <Empty text="There are not suggestions" />
     ) : null;
-
-  const separator = () => <View style={styles.separator} />;
 
   return (
     <View style={styles.container}>
@@ -58,7 +56,7 @@ const ListOfSuggestions = (props) => {
         ItemSeparatorComponent={separator}
         keyExtractor={keyExtractor}
         ListEmptyComponent={renderEmpty}
-        renderItem={({ item }) => <Suggestion item={item} onPress={onPress} />}
+        renderItem={({ item }) => <MovieItem item={item} onPress={onPress} />}
       />
     </View>
   );

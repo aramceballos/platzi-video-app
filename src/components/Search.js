@@ -1,27 +1,23 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, Platform } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { connect } from 'react-redux';
 
-const Search = () => {
+import { setMoviesResult } from '../actions';
+
+const Search = (props) => {
   const [text, setText] = useState('');
-
-  const navigation = useNavigation();
-
-  const onSubmit = (movie) => {
-    navigation.navigate('Movie', { movie });
-  };
 
   const searchMovie = async (query) => {
     try {
       const response = await fetch(
-        `https://yts.mx/api/v2/list_movies.json?limit=1&sort_by=rating&query_term=${query}`,
+        `https://yts.mx/api/v2/list_movies.json?sort_by=rating&query_term=${query}`,
       );
 
       const {
         data: { movies },
       } = await response.json();
 
-      onSubmit(movies[0]);
+      props.setMoviesResult(movies);
     } catch (error) {
       console.log('err getting movies', error);
     }
@@ -54,7 +50,11 @@ const Search = () => {
   );
 };
 
-export default Search;
+const mapDispatchToProps = {
+  setMoviesResult,
+};
+
+export default connect(null, mapDispatchToProps)(Search);
 
 const styles = StyleSheet.create({
   searchInput: {

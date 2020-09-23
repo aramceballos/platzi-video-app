@@ -12,7 +12,7 @@ import LoadingIndicator from './src/components/LoadingIndicator';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['selectedMovie'],
+  blacklist: ['selectedMovie', 'moviesResult'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -30,6 +30,7 @@ const store = createStore(persistedReducer, {
   ],
   suggestions: [],
   selectedMovie: null,
+  moviesResult: [],
 });
 const persistor = persistStore(store);
 

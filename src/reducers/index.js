@@ -18,6 +18,12 @@ const reducer = (state, { type, payload }) => {
         selectedMovie: null,
       };
 
+    case 'SET_MOVIES_RESULT':
+      return {
+        ...state,
+        moviesResult: payload,
+      };
+
     default:
       return state;
   }
