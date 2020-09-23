@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet, TextInput, Platform } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const Search = ({ onSubmit }) => {
+const Search = () => {
   const [text, setText] = useState('');
+
+  const navigation = useNavigation();
+
+  const onSubmit = (movie) => {
+    navigation.navigate('Movie', { movie });
+  };
 
   const searchMovie = async (query) => {
     try {
@@ -32,11 +39,15 @@ const Search = ({ onSubmit }) => {
     <TextInput
       autoCapitalize="none"
       autoCorrect={false}
+      keyboardAppearance="light"
       onChangeText={handleChange}
       onSubmitEditing={handleSubmit}
       placeholder="Search"
       placeholderTextColor="#555"
-      style={styles.searchInput}
+      style={[
+        styles.searchInput,
+        Platform.OS === 'ios' && styles.searchInputIOS,
+      ]}
       underlineColorAndroid="transparent"
       value={text}
     />
@@ -51,5 +62,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     borderWidth: 1,
     borderColor: '#eaeaea',
+  },
+  searchInputIOS: {
+    backgroundColor: '#ddd',
+    width: 300,
+    borderRadius: 10,
+    padding: 8,
+    borderColor: '#0000',
   },
 });

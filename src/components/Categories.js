@@ -5,10 +5,18 @@ import {
   FlatList,
   Text,
   View,
+  TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 const ListOfCategories = ({ categories }) => {
+  const navigation = useNavigation();
+
+  const onPress = (category) => {
+    navigation.navigate('Category', { category });
+  };
+
   const keyExtractor = (item) => item;
 
   const separator = () => <View style={styles.separator} />;
@@ -25,9 +33,11 @@ const ListOfCategories = ({ categories }) => {
         ItemSeparatorComponent={separator}
         keyExtractor={keyExtractor}
         renderItem={({ item }) => (
-          <View style={styles.category}>
+          <TouchableOpacity
+            onPress={() => onPress(item)}
+            style={styles.category}>
             <Text style={styles.text}>{item}</Text>
-          </View>
+          </TouchableOpacity>
         )}
         showsHorizontalScrollIndicator={false}
       />

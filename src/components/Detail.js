@@ -55,12 +55,9 @@ export default Details;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    zIndex: -1,
   },
   trailer: {
     height: 200,
-    marginBottom: 20,
   },
   details: {
     flexDirection: 'row',

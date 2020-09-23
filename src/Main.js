@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { StatusBar, Platform, Image } from 'react-native';
+import { StatusBar, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -15,18 +15,16 @@ const Main = () => {
     <>
       <StatusBar
         animated={true}
-        barStyle={Platform.OS === 'ios' ? 'dark-content' : 'default'}
+        barStyle="dark-content"
         networkActivityIndicatorVisible={true}
-        showHideTransition="fade"
+        showHideTransition="slide"
+        backgroundColor="#fff"
       />
       <NavigationContainer>
         <Tabs.Navigator
           tabBarOptions={{
             activeTintColor: '#0c0',
             showLabel: false,
-            style: {
-              backgroundColor: '#fafafa',
-            },
           }}>
           <Tabs.Screen
             name="Home"

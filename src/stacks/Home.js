@@ -6,6 +6,7 @@ import {
 
 import Home from '../screens/Home';
 import Movie from '../screens/Movie';
+import Category from '../screens/Category';
 import Header from '../components/Header';
 
 const Stack = createStackNavigator();
@@ -16,9 +17,6 @@ const HomeStack = () => {
       screenOptions={{
         gestureEnabled: true,
         headerBackTitleVisible: false,
-        headerStyle: {
-          backgroundColor: '#fafafa',
-        },
         headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
       }}>
       <Stack.Screen
@@ -28,7 +26,20 @@ const HomeStack = () => {
           headerTitle: () => <Header />,
         }}
       />
-      <Stack.Screen name="Movie" component={Movie} />
+      <Stack.Screen
+        name="Category"
+        component={Category}
+        options={{
+          headerTitle: () => <Header />,
+        }}
+      />
+      <Stack.Screen
+        name="Movie"
+        component={Movie}
+        options={{
+          headerTitle: () => <Header />,
+        }}
+      />
     </Stack.Navigator>
   );
 };
