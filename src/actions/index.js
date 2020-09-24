@@ -16,3 +16,8 @@ export const setMoviesResult = (payload) => ({
   type: 'SET_MOVIES_RESULT',
   payload,
 });
+
+export const setLogged = (payload) => ({
+  type: 'SET_LOGGED',
+  payload,
+});

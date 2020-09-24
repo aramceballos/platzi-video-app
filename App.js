@@ -31,6 +31,7 @@ const store = createStore(persistedReducer, {
   suggestions: [],
   selectedMovie: null,
   moviesResult: [],
+  isLoggedIn: false,
 });
 const persistor = persistStore(store);
 

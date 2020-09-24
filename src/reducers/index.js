@@ -24,6 +24,12 @@ const reducer = (state, { type, payload }) => {
         moviesResult: payload,
       };
 
+    case 'SET_LOGGED':
+      return {
+        ...state,
+        isLoggedIn: payload,
+      };
+
     default:
       return state;
   }
